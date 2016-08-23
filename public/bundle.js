@@ -44,12 +44,23 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(34);
+	'use strict';
 
-	var GitHub = __webpack_require__(172);
+	var _react = __webpack_require__(1);
 
-	ReactDOM.render(React.createElement(GitHub, null), document.getElementById('app'));
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(34);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _gitHub = __webpack_require__(172);
+
+	var _gitHub2 = _interopRequireDefault(_gitHub);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	_reactDom2.default.render(_react2.default.createElement(_gitHub2.default, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21406,127 +21417,212 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
+	'use strict';
 
-	var SearchUser = __webpack_require__(173);
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
-	var UserInfo = __webpack_require__(197);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var GitHub = React.createClass({
-	    displayName: 'GitHub',
+	var _react = __webpack_require__(1);
 
+	var _react2 = _interopRequireDefault(_react);
 
-	    getInitialState: function () {
-	        return {
+	var _searchUser = __webpack_require__(173);
+
+	var _searchUser2 = _interopRequireDefault(_searchUser);
+
+	var _userInfo = __webpack_require__(197);
+
+	var _userInfo2 = _interopRequireDefault(_userInfo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GitHub = function (_React$Component) {
+	    _inherits(GitHub, _React$Component);
+
+	    function GitHub(props) {
+	        _classCallCheck(this, GitHub);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GitHub).call(this, props));
+
+	        _this.state = {
 	            user: null,
 	            repos: []
 	        };
-	    },
 
-	    updateUser: function (user) {
-	        this.setState({ user: user });
-	    },
-
-	    updateRepos: function (repos) {
-	        this.setState({ repos: repos });
-	    },
-
-	    render: function () {
-	        return React.createElement(
-	            'div',
-	            { className: 'container' },
-	            React.createElement(SearchUser, { updateUser: this.updateUser, updateRepos: this.updateRepos }),
-	            React.createElement(UserInfo, { user: this.state.user, repos: this.state.repos })
-	        );
+	        _this.updateUser = _this.updateUser.bind(_this);
+	        _this.updateRepos = _this.updateRepos.bind(_this);
+	        return _this;
 	    }
-	});
 
-	module.exports = GitHub;
+	    _createClass(GitHub, [{
+	        key: 'updateUser',
+	        value: function updateUser(user) {
+	            this.setState({ user: user });
+	        }
+	    }, {
+	        key: 'updateRepos',
+	        value: function updateRepos(repos) {
+	            this.setState({ repos: repos });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'container' },
+	                _react2.default.createElement(_searchUser2.default, { updateUser: this.updateUser, updateRepos: this.updateRepos }),
+	                _react2.default.createElement(_userInfo2.default, { user: this.state.user, repos: this.state.repos })
+	            );
+	        }
+	    }]);
+
+	    return GitHub;
+	}(_react2.default.Component);
+
+	;
+
+	exports.default = GitHub;
 
 /***/ },
 /* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
+	'use strict';
 
-	var GitHubUser = __webpack_require__(174);
-
-	var SearchUser = React.createClass({
-	    displayName: 'SearchUser',
-
-
-	    handleSubmit: function (e) {
-	        e.preventDefault();
-
-	        GitHubUser.getByUsername(this.refs.username.value).then(function (response) {
-	            this.props.updateUser(response.data);
-	        }.bind(this));
-
-	        GitHubUser.getReposByUsername(this.refs.username.value).then(function (response) {
-	            this.props.updateRepos(response.data);
-	        }.bind(this));
-	    },
-
-	    render: function () {
-	        return React.createElement(
-	            'div',
-	            { className: 'jumbotron' },
-	            React.createElement(
-	                'h1',
-	                null,
-	                'GitHub Info'
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: 'row' },
-	                React.createElement(
-	                    'form',
-	                    { onSubmit: this.handleSubmit },
-	                    React.createElement(
-	                        'div',
-	                        { className: 'form-group' },
-	                        React.createElement(
-	                            'label',
-	                            null,
-	                            'Username'
-	                        ),
-	                        React.createElement('input', { type: 'text', ref: 'username', className: 'form-control', placeholder: 'Ex: kv' })
-	                    ),
-	                    React.createElement(
-	                        'button',
-	                        { type: 'submit', className: 'btn btn-primary' },
-	                        'Buscar'
-	                    )
-	                )
-	            )
-	        );
-	    }
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _gitHubUser = __webpack_require__(174);
+
+	var _gitHubUser2 = _interopRequireDefault(_gitHubUser);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SearchUser = function (_React$Component) {
+	    _inherits(SearchUser, _React$Component);
+
+	    function SearchUser(props) {
+	        _classCallCheck(this, SearchUser);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchUser).call(this, props));
+
+	        _this.handleSubmit = _this.handleSubmit.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(SearchUser, [{
+	        key: 'handleSubmit',
+	        value: function handleSubmit(e) {
+	            var _this2 = this;
+
+	            e.preventDefault();
+
+	            _gitHubUser2.default.getByUsername(this.refs.username.value).then(function (response) {
+	                _this2.props.updateUser(response.data);
+	            });
+
+	            _gitHubUser2.default.getReposByUsername(this.refs.username.value).then(function (response) {
+	                _this2.props.updateRepos(response.data);
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'jumbotron' },
+	                _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    'GitHub Info'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'form',
+	                        { onSubmit: this.handleSubmit },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-group' },
+	                            _react2.default.createElement(
+	                                'label',
+	                                null,
+	                                'Username'
+	                            ),
+	                            _react2.default.createElement('input', { type: 'text', ref: 'username', className: 'form-control', placeholder: 'Ex: kv' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'submit', className: 'btn btn-primary' },
+	                            'Buscar'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return SearchUser;
+	}(_react2.default.Component);
+
+	;
+
 	SearchUser.propTypes = {
-	    updateUser: React.PropTypes.func.isRequired,
-	    updateRepos: React.PropTypes.func.isRequired
+	    updateUser: _react2.default.PropTypes.func.isRequired,
+	    updateRepos: _react2.default.PropTypes.func.isRequired
 	};
 
-	module.exports = SearchUser;
+	exports.default = SearchUser;
 
 /***/ },
 /* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var axios = __webpack_require__(175);
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _axios = __webpack_require__(175);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var GitHubUser = {
-	    getByUsername: function (username) {
-	        return axios.get('https://api.github.com/users/' + username);
+	    getByUsername: function getByUsername(username) {
+	        return _axios2.default.get('https://api.github.com/users/' + username);
 	    },
-
-	    getReposByUsername: function (username) {
-	        return axios.get('https://api.github.com/users/' + username + '/repos');
+	    getReposByUsername: function getReposByUsername(username) {
+	        return _axios2.default.get('https://api.github.com/users/' + username + '/repos');
 	    }
 	};
 
-	module.exports = GitHubUser;
+	exports.default = GitHubUser;
 
 /***/ },
 /* 175 */
@@ -22869,139 +22965,191 @@
 /* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
+	'use strict';
 
-	var UserRepos = __webpack_require__(198);
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
-	function UserInfo(props) {
-	    var userInfo = props.user ? React.createElement(
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _userRepos = __webpack_require__(198);
+
+	var _userRepos2 = _interopRequireDefault(_userRepos);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UserInfo = function UserInfo(_ref) {
+	    var user = _ref.user;
+	    var repos = _ref.repos;
+
+
+	    var userInfo = user ? _react2.default.createElement(
 	        'div',
 	        { className: 'row' },
-	        React.createElement(
+	        _react2.default.createElement(
 	            'div',
 	            { className: 'col-lg-4' },
-	            React.createElement('img', { className: 'img-circle', src: props.user.avatar_url, alt: 'avatar', width: '140', height: '140' }),
-	            React.createElement(
+	            _react2.default.createElement('img', { className: 'img-circle', src: user.avatar_url, alt: 'avatar', width: '140', height: '140' }),
+	            _react2.default.createElement(
 	                'h2',
 	                null,
-	                props.user.login
+	                user.login
 	            ),
-	            React.createElement(
+	            _react2.default.createElement(
 	                'p',
 	                null,
-	                props.user.name
+	                user.name
 	            ),
-	            React.createElement(
+	            _react2.default.createElement(
 	                'p',
 	                null,
 	                'Followers: ',
-	                props.user.followers,
+	                user.followers,
 	                ' / Following: ',
-	                props.user.following
+	                user.following
 	            ),
-	            React.createElement(
+	            _react2.default.createElement(
 	                'p',
 	                null,
-	                React.createElement(
+	                _react2.default.createElement(
 	                    'a',
-	                    { className: 'btn btn-default', href: props.user.html_url, role: 'button' },
+	                    { className: 'btn btn-default', href: user.html_url, role: 'button' },
 	                    'View details'
 	                )
 	            )
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	            'div',
 	            { className: 'col-lg-8' },
-	            React.createElement(UserRepos, { repos: props.repos })
+	            _react2.default.createElement(_userRepos2.default, { repos: repos })
 	        )
 	    ) : null;
 
 	    return userInfo;
-	}
-
-	UserInfo.propTypes = {
-	    user: React.PropTypes.object,
-	    repos: React.PropTypes.array
 	};
 
-	module.exports = UserInfo;
+	UserInfo.propTypes = {
+	    user: _react2.default.PropTypes.object,
+	    repos: _react2.default.PropTypes.array
+	};
+
+	exports.default = UserInfo;
 
 /***/ },
 /* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
+	"use strict";
 
-	var UserRepos = React.createClass({
-	    displayName: "UserRepos",
-
-	    getInitialState: function () {
-	        return {
-	            reposCount: 0
-	        };
-	    },
-	    componentWillReceiveProps: function (props) {
-	        this.setState({ reposCount: props.repos.length });
-	    },
-	    render: function () {
-	        var repos = this.props.repos.map(function (repo, key) {
-	            return React.createElement(
-	                "div",
-	                { key: key, className: "thumbnail" },
-	                React.createElement(
-	                    "div",
-	                    { className: "caption" },
-	                    React.createElement(
-	                        "h3",
-	                        null,
-	                        repo.name,
-	                        React.createElement(
-	                            "span",
-	                            { className: "badge" },
-	                            repo.stargazers_count,
-	                            " STARS"
-	                        )
-	                    ),
-	                    React.createElement(
-	                        "p",
-	                        null,
-	                        repo.description
-	                    ),
-	                    React.createElement(
-	                        "p",
-	                        null,
-	                        React.createElement(
-	                            "a",
-	                            { href: repo.html_url, className: "btn btn-primary", role: "button" },
-	                            "Repository"
-	                        ),
-	                        React.createElement(
-	                            "a",
-	                            { href: repo.html_url + '/issues', className: "btn btn-default", role: "button" },
-	                            "Issues (",
-	                            repo.open_issues,
-	                            ") "
-	                        )
-	                    )
-	                )
-	            );
-	        });
-
-	        return React.createElement(
-	            "div",
-	            null,
-	            React.createElement(
-	                "h2",
-	                null,
-	                this.state.reposCount,
-	                " repositories"
-	            ),
-	            repos
-	        );
-	    }
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
 	});
 
-	module.exports = UserRepos;
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserRepos = function (_React$Component) {
+	    _inherits(UserRepos, _React$Component);
+
+	    function UserRepos(props) {
+	        _classCallCheck(this, UserRepos);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserRepos).call(this, props));
+
+	        _this.state = {
+	            reposCount: 0
+	        };
+	        return _this;
+	    }
+
+	    _createClass(UserRepos, [{
+	        key: "componentWillReceiveProps",
+	        value: function componentWillReceiveProps(props) {
+	            this.setState({ reposCount: props.repos.length });
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var repos = this.props.repos;
+
+
+	            var reposList = repos.map(function (repo, key) {
+	                return _react2.default.createElement(
+	                    "div",
+	                    { key: key, className: "thumbnail" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "caption" },
+	                        _react2.default.createElement(
+	                            "h3",
+	                            null,
+	                            repo.name,
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "badge" },
+	                                repo.stargazers_count,
+	                                " STARS"
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            "p",
+	                            null,
+	                            repo.description
+	                        ),
+	                        _react2.default.createElement(
+	                            "p",
+	                            null,
+	                            _react2.default.createElement(
+	                                "a",
+	                                { href: repo.html_url, className: "btn btn-primary", role: "button" },
+	                                "Repository"
+	                            ),
+	                            _react2.default.createElement(
+	                                "a",
+	                                { href: repo.html_url + '/issues', className: "btn btn-default", role: "button" },
+	                                "Issues (",
+	                                repo.open_issues,
+	                                ") "
+	                            )
+	                        )
+	                    )
+	                );
+	            });
+
+	            return _react2.default.createElement(
+	                "div",
+	                null,
+	                _react2.default.createElement(
+	                    "h2",
+	                    null,
+	                    this.state.reposCount,
+	                    " repositories"
+	                ),
+	                reposList
+	            );
+	        }
+	    }]);
+
+	    return UserRepos;
+	}(_react2.default.Component);
+
+	;
+
+	exports.default = UserRepos;
 
 /***/ }
 /******/ ]);

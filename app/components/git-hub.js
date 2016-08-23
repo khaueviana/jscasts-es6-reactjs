@@ -1,27 +1,32 @@
-var React = require('react');
+import React from 'react';
 
-var SearchUser = require('./search-user')
+import SearchUser from  './search-user'
 
-var UserInfo = require('./user-info');
+import UserInfo from './user-info'
 
-var GitHub = React.createClass({
+class GitHub extends React.Component {
 
-    getInitialState: function () {
-        return {
+    constructor(props){
+        super(props);
+
+        this.state = {
             user: null,
             repos: []
-        };
-    },
+        }
 
-    updateUser: function (user) {
+        this.updateUser =this.updateUser.bind(this);
+        this.updateRepos =this.updateRepos.bind(this); 
+    }
+
+    updateUser(user) {
         this.setState({ user: user });
-    },
+    }
 
-    updateRepos: function (repos) {
+    updateRepos(repos) {
         this.setState({ repos: repos });
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="container">
                 <SearchUser updateUser={this.updateUser} updateRepos={this.updateRepos}/>
@@ -29,6 +34,6 @@ var GitHub = React.createClass({
             </div>
         );
     }
-});
+};
 
-module.exports = GitHub;
+export default GitHub;
